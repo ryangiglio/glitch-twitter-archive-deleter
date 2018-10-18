@@ -7,10 +7,16 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "dotenv": "^6.1.0",
+    "express": "^4.16.3",
+    "fast-csv": "^2.4.1",
+    "lodash": "^4.17.11",
+    "node-persist": "^3.0.1",
+    "twitter": "^1.7.1"
   },
   "engines": {
     "node": "8.x"
@@ -23,5 +29,8 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
 }
