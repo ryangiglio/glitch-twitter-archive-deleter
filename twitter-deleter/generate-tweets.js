@@ -10,17 +10,20 @@ const twitterClient = new Twitter({
 })
 
 const generateTweet = () => {
-  twitterClient.post(`statuses/update`, {
-    status: randomstring.generate(Math.ceil(Math.random() * 100)),
-  }).then((tweet) => {
-    console.log(tweet)
+  twitterClient
+    .post(`statuses/update`, {
+      status: randomstring.generate(Math.ceil(Math.random() * 100)),
+    })
+    .then(tweet => {
+      console.log(tweet)
 
-    setTimeout(() => {
-      generateTweet()
-    }, Math.ceil(Math.random() * 10000))
-  }).catch((err) => {
-    console.log(err)
-  })
+      setTimeout(() => {
+        generateTweet()
+      }, Math.ceil(Math.random() * 10000))
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }
 
 generateTweet()

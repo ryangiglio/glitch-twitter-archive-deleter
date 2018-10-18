@@ -13,7 +13,7 @@ const localStorage = require('./localStorage')
 const verifyCredentials = require('./verifyCredentials')
 const loadTweetArchive = require('./loadTweetArchive')
 
-module.exports = async function () {
+module.exports = async function() {
   await verifyCredentials()
     .then(loadTweetArchive)
     .then(async tweetsArray => {
@@ -24,7 +24,10 @@ module.exports = async function () {
       let startingIndex = 0
 
       if (lastTweetDeleted) {
-        const lastDeletedIndex = findIndex(tweetsArray, ({ tweet_id }) => tweet_id === lastTweetDeleted)
+        const lastDeletedIndex = findIndex(
+          tweetsArray,
+          ({ tweet_id }) => tweet_id === lastTweetDeleted
+        )
 
         console.log('Previous session found – last tweet deleted')
         console.log(tweetsArray[lastDeletedIndex])
