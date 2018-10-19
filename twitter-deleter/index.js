@@ -8,10 +8,10 @@ const { findIndex } = require('lodash')
 // Functions
 const reverseTweetStream = require('./reverseTweetStream')
 const processTweets = require('./processTweets')
-
-const localStorage = require('./localStorage')
 const verifyCredentials = require('./verifyCredentials')
 const loadTweetArchive = require('./loadTweetArchive')
+
+const localStorage = require('./localStorage')
 
 module.exports = async function() {
   await verifyCredentials()

@@ -9,7 +9,7 @@ module.exports = async function() {
     .then(account => {
       console.log(`Credentials verified for @${account.screen_name}`)
 
-      return Promise.resolve()
+      return Promise.resolve(account)
     })
     .catch(err => {
       if (err[0].code === 32) {

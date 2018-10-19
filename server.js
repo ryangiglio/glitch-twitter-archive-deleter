@@ -1,9 +1,13 @@
-// server.js
-// where your node app starts
+// Config
+require('dotenv').config()
 
 // init project
 const express = require('express')
 const app = express()
+
+const verifyCredentials = require('./twitter-deleter/verifyCredentials')
+const loadTweetArchive = require('./twitter-deleter/loadTweetArchive')
+
 const twitterDeleter = require('./twitter-deleter')
 
 // we've started you off with Express,
@@ -13,24 +17,45 @@ const twitterDeleter = require('./twitter-deleter')
 app.use(express.static('public'))
 
 // Serve the instructions page
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html')
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html')
 })
 
-app.get('/verifyConfig', function(request, response) {
-  // TODO: Check that everything is set up and ready to go
-  // Twitter credentials are correct
-  // tweets csv is readable
-  response.send('hm')
+app.get('/verifyCredentials', async (req, res) => {
+  await verifyCredentials()
+    .then(account => {
+      res.status(200).json({
+        message: `Credentials verified for @${account.screen_name}`,
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(400).json({
+        error: err.message,
+      })
+    })
 })
 
-app.get('/go', function(request, response) {
+app.get('/verifyArchive', async (req, res) => {
+  await loadTweetArchive()
+    .then(tweetsArray => {
+      res.status(200).json({
+        message: `${tweetsArray.length} Tweets loaded`,
+      })
+    })
+    .catch(err => {
+      res.status(400).json({
+        error: err.message,
+      })
+    })
+})
+
+app.get('/go', async (req, res) => {
   // TODO: Start running the deleter!
   twitterDeleter()
-  response.send()
+  res.send()
 })
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT || 3000, function() {
+const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
 })
