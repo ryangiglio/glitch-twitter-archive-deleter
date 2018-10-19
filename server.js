@@ -8,7 +8,7 @@ const app = express()
 const verifyCredentials = require('./twitter-deleter/verifyCredentials')
 const loadTweetArchive = require('./twitter-deleter/loadTweetArchive')
 
-const twitterDeleter = require('./twitter-deleter')
+const startDeleter = require('./twitter-deleter')
 
 // we've started you off with Express,
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
@@ -51,9 +51,12 @@ app.get('/api/verifyArchive', async (req, res) => {
 })
 
 app.get('/api/go', async (req, res) => {
-  // TODO: Start running the deleter!
-  twitterDeleter()
-  res.send()
+  startDeleter()
+
+  res.status(200).json({
+    message:
+      'Deleter started! Check the app console for progress. This could take a while...',
+  })
 })
 
 const listener = app.listen(process.env.PORT || 3000, () => {
