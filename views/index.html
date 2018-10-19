@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome to Glitch!</title>
+    <title>Twitter Archive Deleter</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
@@ -18,16 +18,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
     
     <!-- import the webpage's client-side javascript file -->
-    <script src="/client.js" defer></script>
+    <script src="/js/client.js" defer></script>
   </head>
   <body>
-    This is the website for the deleter
+    <h1>Twitter Archive Deleter</h1>
+
+    <h2>What it does</h2>
+    <p>Deletes your whole twitter archive</p>
+
+    <h2>Instructions</h2>
+    <ol>
+      <li class="mb3">Download your Twitter archive and put the <code>tweets.csv</code> file in this project's <code>/data</code> folder<br /><a href="/archive-instructions">Detailed Instructions</a></li>
+      <li class="mb3">Make a Twitter app with write access and add the credentials to this project's <code>.env</code> file<br /><a href="/credentials-instructions">Detailed Instructions</a></li>
+      <li class="">Press the huge Delete My Tweets button below</li>
+    </ol>
     
-    <button id="js-go-button">
-      Go!
+    <h2>Ready?</h2>
+    <p id="verify-archive"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter archive...</p>
+    <p id="verify-credentials"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter credentials...</p>
+
+    <button id="go-button">
+      Delete My Tweets 
     </button>
 
     <!-- include the Glitch button to show what the webpage is about and

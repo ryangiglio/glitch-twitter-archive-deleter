@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 })
 
-app.get('/verifyCredentials', async (req, res) => {
+app.get('/api/verifyCredentials', async (req, res) => {
   await verifyCredentials()
     .then(account => {
       res.status(200).json({
@@ -36,7 +36,7 @@ app.get('/verifyCredentials', async (req, res) => {
     })
 })
 
-app.get('/verifyArchive', async (req, res) => {
+app.get('/api/verifyArchive', async (req, res) => {
   await loadTweetArchive()
     .then(tweetsArray => {
       res.status(200).json({
@@ -50,7 +50,7 @@ app.get('/verifyArchive', async (req, res) => {
     })
 })
 
-app.get('/go', async (req, res) => {
+app.get('/api/go', async (req, res) => {
   // TODO: Start running the deleter!
   twitterDeleter()
   res.send()
