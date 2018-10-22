@@ -103,8 +103,8 @@ async function recursivelyProcessTweets(tweetsArray, index) {
         `Processing tweet ${index}/${tweetsArray.length} in your archive`
       )
 
-      // Wait for the stack to clear before moving on
-      setTimeout(() => recursivelyProcessTweets(tweetsArray, index + 1), 0)
+      // Wait 1s before the next request so we never hit the 4k/hr Glitch request limit
+      setTimeout(() => recursivelyProcessTweets(tweetsArray, index + 1), 1000)
     })
     .catch(err => {
       throw new Error(err)
