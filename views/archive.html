@@ -1,0 +1,65 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Twitter Archive Deleter</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <h1>Twitter Archive Deleter</h1>
+    <h2>Instructions - Downloading your Twitter Archive</h2>
+    <ol>
+      <li>
+        <p>Log in to Twitter</p>
+      </li>
+      <li>
+        <p>Go to Your Account settings (Settings and Privacy in the avatar menu) <a href="https://twitter.com/settings/account">https://twitter.com/settings/account</a></p>
+        <img src="/img/archive-1.png" />
+      </li>
+      <li>
+        <p>Scroll down to "Your Tweet archive" and click the "Request your archive" button.</p>
+        <img src="/img/archive-2.png" />
+        <p>You will see a message that Twitter will email you a link and it may take a little while. In my experience it usually takes a half hour to an hour, but I think it depends on how many Tweets you have. The more the longer.</p>
+        <img src="/img/archive-3.png" />
+      </li>
+      <li>
+        <p>When you get the email, click the "Download Now" button.</p>
+        <img src="/img/archive-4.png" />
+      </li>
+      <li>
+        <p>It'll bring you to a page with a Download button. Click it!</p>
+        <img src="/img/archive-5.png" />
+      </li>
+      <li>
+        <p>Unzip the download In the root of the zip there will be a tweets.csv file. That's what you need!</p>
+      </li>
+      <li>
+        <p>Drag and drop the csv to file into Glitch to upload it.</p>
+      </li>
+    </ol>
+   
+
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+
+  </body>
+</html>

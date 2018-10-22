@@ -21,6 +21,16 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 })
 
+// Serve the instructions page
+app.get('/archive-instructions', (req, res) => {
+  res.sendFile(__dirname + '/views/archive.html')
+})
+
+// Serve the instructions page
+app.get('/credentials-instructions', (req, res) => {
+  res.sendFile(__dirname + '/views/credentials.html')
+})
+
 app.get('/api/verifyCredentials', async (req, res) => {
   await verifyCredentials()
     .then(account => {
