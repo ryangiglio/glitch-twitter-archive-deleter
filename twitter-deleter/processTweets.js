@@ -1,22 +1,30 @@
 const twitterClient = require('./twitterClient')
 const localStorage = require('./localStorage')
 
+const THROTTLE_INTERVAL_SPEED = 1000
+
+let queuedAction = null
+let processInterval
+
 async function processTweet(tweet) {
+  console.log('processing tweet')
   return new Promise((resolve, reject) => {
     console.log(`Deleting tweet ${tweet.tweet_id}\n${tweet.text}`)
 
-    /*
-    return twitterClient.get(`statuses/show/${tweet.tweet_id}`, (err, returnedTweet, response) => {
-      if (err) {
-        throw new Error(err)
-      } else {
-        console.log('tweet processed but not deleted phew')
+    return twitterClient.get(
+      `statuses/show/${tweet.tweet_id}`,
+      (err, returnedTweet, response) => {
+        if (err) {
+          throw new Error(err)
+        } else {
+          console.log('tweet processed but not deleted phew')
 
-        return resolve(returnedTweet)
+          return resolve(returnedTweet)
+        }
       }
-    })
-    */
+    )
 
+    /*
     return twitterClient.post(
       `statuses/destroy/${tweet.tweet_id}`,
       async (err, returnedTweet, response) => {
@@ -27,7 +35,10 @@ async function processTweet(tweet) {
             case 34:
               // No status found with that ID
               // Corresponds with HTTP 404. The requested Tweet ID is not found (if it existed, it was probably deleted)
-              console.log('Tweet not found\nYou may have already deleted it')
+              console.log(`
+                Tweet not found
+                You may have already deleted it
+              `)
 
               await localStorage.setItem('lastTweetDeleted', tweet.tweet_id)
 
@@ -44,7 +55,10 @@ async function processTweet(tweet) {
             case 144:
               // No status found with that ID
               // Corresponds with HTTP 404. The requested Tweet ID is not found (if it existed, it was probably deleted)
-              console.log('Tweet not found\nYou may have already deleted it')
+              console.log(`
+                Tweet not found
+                You may have already deleted it
+              `)
 
               await localStorage.setItem('lastTweetDeleted', tweet.tweet_id)
 
@@ -53,9 +67,10 @@ async function processTweet(tweet) {
             case 179:
               // Sorry, you are not authorized to see this status
               // Corresponds with HTTP 403. Thrown when a Tweet cannot be viewed by the authenticating user, usually due to the Tweet’s author having protected their Tweets.
-              console.log(
-                'You are not authorized to see this status\nYou may have retweeted a user who is now protected or who has blocked you.'
-              )
+              console.log(`
+                You are not authorized to see this status
+                You may have retweeted a user who is now protected or who has blocked you.
+              `)
 
               // We can't do anything with this one, so it may as well be "deleted"
               await localStorage.setItem('lastTweetDeleted', tweet.tweet_id)
@@ -90,21 +105,26 @@ async function processTweet(tweet) {
         }
       }
     )
+    */
   })
 }
 
 async function recursivelyProcessTweets(tweetsArray, index) {
   processTweet(tweetsArray[index])
     .then(deletedTweet => {
-      console.log(
-        '================================================================================'
-      )
-      console.log(
-        `Processing tweet ${index}/${tweetsArray.length} in your archive`
-      )
+      if (index + 1 < tweetsArray.length) {
+        console.log(`
+          ================================================================================
+          Processing tweet ${index}/${tweetsArray.length} in your archive
+        `)
 
-      // Wait 1s before the next request so we never hit the 4k/hr Glitch request limit
-      setTimeout(() => recursivelyProcessTweets(tweetsArray, index + 1), 1000)
+        queuedAction = () => recursivelyProcessTweets(tweetsArray, index + 1)
+      } else {
+        console.log(`
+          ================================================================================
+          DONE!!
+        `)
+      }
     })
     .catch(err => {
       throw new Error(err)
@@ -112,13 +132,21 @@ async function recursivelyProcessTweets(tweetsArray, index) {
 }
 
 module.exports = async function(tweetsArray, startingIndex = 0) {
-  console.log(
-    '================================================================================'
-  )
-  console.log('HERE WE GO')
-  console.log(
-    '================================================================================'
-  )
+  console.log(`
+    ================================================================================
+    HERE WE GO
+    ================================================================================
+  `)
 
-  recursivelyProcessTweets(tweetsArray, startingIndex)
+  // Use a 1s interval to throttle calls to 1 per second
+  processInterval = setInterval(() => {
+    console.log('interval running')
+
+    if (queuedAction) {
+      queuedAction.call()
+      queuedAction = null
+    }
+  }, THROTTLE_INTERVAL_SPEED)
+
+  queuedAction = () => recursivelyProcessTweets(tweetsArray, startingIndex)
 }
