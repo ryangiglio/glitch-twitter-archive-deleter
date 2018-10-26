@@ -1,3 +1,5 @@
+const config = require('config')
+
 const twitterClient = require('./twitterClient')
 const localStorage = require('./localStorage')
 
@@ -7,6 +9,14 @@ let queuedAction = null
 let processInterval
 
 async function processTweet(tweet) {
+  if (config.savedTweets.includes(tweet.tweet_id)) {
+    console.log(`!!!! Tweet SAVED ${tweet.tweet_id}\n${tweet.text}`)
+
+    await localStorage.setItem('lastTweetDeleted', tweet.tweet_id)
+
+    return Promise.resolve(tweet)
+  }
+
   return new Promise((resolve, reject) => {
     console.log(`Deleting tweet ${tweet.tweet_id}\n${tweet.text}`)
 
@@ -109,16 +119,16 @@ async function processTweet(tweet) {
 }
 
 async function recursivelyProcessTweets(tweetsArray, index) {
+  console.log(
+    `================================================================================`
+  )
+  console.log(
+    `Processing tweet ${index + 1}/${tweetsArray.length} in your archive`
+  )
+
   processTweet(tweetsArray[index])
     .then(deletedTweet => {
       if (index + 1 < tweetsArray.length) {
-        console.log(
-          `================================================================================`
-        )
-        console.log(
-          `Processing tweet ${index}/${tweetsArray.length} in your archive`
-        )
-
         queuedAction = () => recursivelyProcessTweets(tweetsArray, index + 1)
       } else {
         console.log(
