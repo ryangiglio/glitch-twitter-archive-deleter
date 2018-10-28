@@ -23,8 +23,18 @@ app.get('/', (req, res) => {
 })
 
 // Serve the instructions page
+app.get('/glitch-instructions', (req, res) => {
+  res.sendFile(__dirname + '/views/glitch.html')
+})
+
+// Serve the instructions page
 app.get('/archive-instructions', (req, res) => {
   res.sendFile(__dirname + '/views/archive.html')
+})
+
+// Serve the instructions page
+app.get('/developer-instructions', (req, res) => {
+  res.sendFile(__dirname + '/views/developer.html')
 })
 
 // Serve the instructions page

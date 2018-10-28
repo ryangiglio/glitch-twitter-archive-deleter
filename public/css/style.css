@@ -1,5 +1,4 @@
-/* styles */
-/* called by your view template */
+/* Glitch default styles */
 
 * {
   box-sizing: border-box;
@@ -21,11 +20,6 @@ h1 {
 
 p {
   max-width: 600px;
-}
-
-img {
-  max-width: 600px;
-  height: auto;
 }
 
 form {
@@ -73,4 +67,11 @@ footer {
   margin-top: 50px;
   padding-top: 25px;
   border-top: 1px solid lightgrey;
+}
+
+/* Custom styles */
+.instructions-img {
+  max-width: 600px;
+  height: auto;
+  border: 2px solid #373fff;
 }

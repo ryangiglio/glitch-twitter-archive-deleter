@@ -1,24 +1,18 @@
-# Welcome to Glitch
+# So you want to delete your tweets
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+Great! Let's get started.
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+## Setup
 
-Find out more [about Glitch](https://glitch.com/about).
+### (Optional) Sign up for Glitch
 
-## Your Project
+You _can_ setup and run this app without signing up for Glitch, but if there's an issue and you need to come back later and resume deleting, making an account will make sure your stuff is saved and that it picks up from where it left off. Up to you
 
-On the front-end,
+### Download your Twitter archive
 
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
-
-On the back-end,
-
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-## Made by [Glitch](https://glitch.com/)
-
-\ ゜ o ゜)ノ
+1. Go to your Twitter [account settings](https://twitter.com/settings/account)
+2. Scroll down to "Your Tweet archive" and click the "Request your archive" button
+3. Wait to get an email from Twitter. It takes longer if you have a lot of tweets, but in my experience not usually more than an hour
+4. Follow the link in your email and download your archive from the page
+5. Unzip the archive (it'll have a long name of letters and numbers) and open the folder
+6.
