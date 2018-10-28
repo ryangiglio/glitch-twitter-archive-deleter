@@ -4,6 +4,7 @@ require('dotenv').config()
 // init project
 const express = require('express')
 const app = express()
+const moment = require('moment')
 
 const verifyCredentials = require('./twitter-deleter/verifyCredentials')
 const loadTweetArchive = require('./twitter-deleter/loadTweetArchive')
@@ -49,7 +50,8 @@ app.get('/api/verifyArchive', async (req, res) => {
   await loadTweetArchive()
     .then(tweetsArray => {
       res.status(200).json({
-        message: `${tweetsArray.length} Tweets loaded`,
+        message: `${tweetsArray.length} Tweets loaded.`,
+        timeEstimate: moment.duration(tweetsArray.length, 'seconds').humanize(),
       })
     })
     .catch(err => {
