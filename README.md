@@ -7,6 +7,7 @@ Great! Let's get started.
 ### (Optional) Sign up for Glitch
 
 You _can_ setup and run this app without signing up for Glitch, but if there's an issue and you need to come back later and resume deleting, making an account will make sure your stuff is saved and that it picks up from where it left off. Up to you!
+
 1. TODO instructions
 
 ### Download your Twitter archive
@@ -44,19 +45,18 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 3. Enter `Glitch Twitter archive deleter credentials` as the Application description
 4. Enter `https://twitter.com` as the website URL  
    _This value doesn't actually matter - it won't be used or referenced in this app_
-5. Scroll to the bottom of the page and copy/paste this text in the "Tell us how this app will be used" field  
+5. Scroll to the bottom of the page and copy/paste this text in the "Tell us how this app will be used" field
    ```
    This app will be used to generate credentials that let me use the Twitter API on behalf of my own account.
    ```
 6. Press Create, and then press Create again on the popop
 7. Click on the "Keys and tokens" tab at the top. Under the "Access token & access token secret
-" section, click the Create button
-8. In this project, copy the contents of `.env.sample` into `.env` (the one with the little key)
-9. Copy & paste your Consumer Key, Consumer Secret, Access Token, and Access Token secret from the Twitter app page into your `.env`. It should look like this, with your values filled in:
+   " section, click the Create button
+8. Copy & paste your Consumer Key, Consumer Secret, Access Token, and Access Token secret from the Twitter app page into your `.env` file (the one with the little key in the file browser on the left). It should look like this, with your values filled in:
+
    ```
    TWITTER_CONSUMER_KEY=Pqhe6a6rSFb4vfCun7sYyDWOA
    TWITTER_CONSUMER_SECRET=HfTfQc0lFm33T3Ixfv4cCmRj0k6daT9iSa6DF2n3H6qwZ4lWai
    TWITTER_ACCESS_TOKEN=12345678-AzNwMwPGtNehMvf86ChlhYuowX95Bw7BBbpmFm2qw
    TWITTER_ACCESS_TOKEN_SECRET=ym62oXokuSH5f7jqw18Mr7LuwCaifQHaFIQUtcoeC8QZL
    ```
-   

@@ -21,16 +21,21 @@
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/js/client.js" defer></script>
   </head>
   <body>
     <h1>Twitter Archive Deleter</h1>
-    <p><a href="/">Go back home</a></p>
-    <h2>Instructions - Remixing this app on Glitch</h2>
-    <p>Glitch is a platform that lets you spin off copies of other people's code and modify/run them yourself. In the case of this app, that will let you upload your archive and set up your credentials inside a private copy that you control. While Glitch does let you do this without registering, I recommend you do anyway because that will allow the app to save your info and pick up where it left off in case of an issue.</p>
-    <ol>
-      <li>Click this button! <a href="https://glitch.com/edit/#!/remix/twitter-archive-deleter"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" /></a></li>
-    </ol>
-   
+    
+    <h2>Verifying config...</h2>
+    <p id="verify-archive"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter archive...</p>
+    <p id="verify-credentials"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter credentials...</p>
+
+    <h2>Ready?</h2>
+    <button id="go-button">
+      Delete My Tweets 
+    </button>
 
     <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->

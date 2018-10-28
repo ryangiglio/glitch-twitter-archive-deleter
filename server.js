@@ -19,27 +19,19 @@ app.use(express.static('public'))
 
 // Serve the instructions page
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
+  if (process.env.INTRO_MODE) {
+    res.sendFile(__dirname + '/views/intro.html')
+  } else {
+    res.sendFile(__dirname + '/views/app.html')
+  }
 })
 
-// Serve the instructions page
-app.get('/glitch-instructions', (req, res) => {
-  res.sendFile(__dirname + '/views/glitch.html')
+app.get('/intro', (req, res) => {
+  res.sendFile(__dirname + '/views/intro.html')
 })
 
-// Serve the instructions page
-app.get('/archive-instructions', (req, res) => {
-  res.sendFile(__dirname + '/views/archive.html')
-})
-
-// Serve the instructions page
-app.get('/developer-instructions', (req, res) => {
-  res.sendFile(__dirname + '/views/developer.html')
-})
-
-// Serve the instructions page
-app.get('/credentials-instructions', (req, res) => {
-  res.sendFile(__dirname + '/views/credentials.html')
+app.get('/app', (req, res) => {
+  res.sendFile(__dirname + '/views/app.html')
 })
 
 app.get('/api/verifyCredentials', async (req, res) => {
