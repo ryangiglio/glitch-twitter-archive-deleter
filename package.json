@@ -1,5 +1,5 @@
 {
-  "name": "twitter-archive-deleter-glitch",
+  "name": "glitch-twitter-archive-deleter",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
