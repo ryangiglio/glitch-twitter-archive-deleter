@@ -12,13 +12,7 @@ module.exports = async function() {
       return Promise.resolve(account)
     })
     .catch(err => {
-      if (typeof err === 'object') {
-        throw new Error(
-          `${err.syscall} ${err.code} ${err.host} ${err.hostname}:${err.port}`
-        )
-      }
-
-      if (typeof err === 'array') {
+      if (Array.isArray(err)) {
         if (err[0].code === 32) {
           throw new Error('Could not authenticate you')
         } else if (err[0].code === 89) {
@@ -27,6 +21,10 @@ module.exports = async function() {
           throw new Error('Bad Authentication data.')
         }
       }
+
+      throw new Error(
+        `${err.syscall} ${err.code} ${err.host} ${err.hostname}:${err.port}`
+      )
 
       throw new Error('Unhandled error')
     })
