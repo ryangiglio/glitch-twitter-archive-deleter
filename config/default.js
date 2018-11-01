@@ -1,3 +1,5 @@
 module.exports = {
-  savedTweets: ['1234567890'],
+  savedTweets: [
+    '1234567890',
+  ],
 }
