@@ -53,6 +53,7 @@ app.get('/api/verifyArchive', async (req, res) => {
     .then(tweetsArray => {
       res.status(200).json({
         message: `${tweetsArray.length} Tweets loaded`,
+        tweetCount: tweetsArray.length,
         timeEstimate: moment.duration(tweetsArray.length, 'seconds').humanize(),
       })
     })

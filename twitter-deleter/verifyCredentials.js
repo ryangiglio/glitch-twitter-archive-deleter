@@ -16,9 +16,11 @@ module.exports = async function() {
         if (err[0].code === 32) {
           throw new Error('Could not authenticate you')
         } else if (err[0].code === 89) {
-          throw new Error('Invalid or expired token.')
+          throw new Error(
+            'The Twitter credentials provided in your .env are either invalid or expired'
+          )
         } else if (err[0].code === 215) {
-          throw new Error('Bad Authentication data.')
+          throw new Error('Bad Authentication data')
         }
       }
 

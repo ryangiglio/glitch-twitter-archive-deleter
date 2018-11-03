@@ -99,3 +99,26 @@ footer {
   top: 2px;
   box-shadow: 0 7px 0 #1576b2, 0 0px 4px 1px rgba(0, 0, 0, 0.3);
 }
+
+.success {
+  color: #33db1a;
+}
+
+.failure {
+  color: #da1a33;
+}
+
+#confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#app {
+  /* To position above the confetti */
+  position: relative;
+  z-index: 2;
+}

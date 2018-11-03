@@ -26,32 +26,44 @@
     <script src="/js/client.js" defer></script>
   </head>
   <body>
-    <h1>Twitter Archive Deleter</h1>
-    
-    <h2>Verifying config...</h2>
-    <p id="verify-archive"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter archive...</p>
-    <p id="verify-credentials"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter credentials...</p>
+    <div id="app">
+      <h1>Twitter Archive Deleter</h1>
+      
+      <h2>Verifying config...</h2>
+      <p id="verify-archive"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter archive...</p>
+      <p id="verify-credentials"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter credentials...</p>
 
-    <div id="go-container" class="dn">
-      <h2>Setup Complete!</h2>
-      <p id="time-estimate"></p>
-      <p>Once you start the process, feel free to close this page. It'll continue running on its own in the background.</p>
-      <p>If you want to watch it running or check on its progress:</p>
-      <ol>
-        <li>Come back to this page</li>
-        <li>Click the Glitch fish in the upper right corner and click View Source. It'll bring you back to the file browser where you followed the setup instructions.</li>
-        <li>Above the file browser, click Status. It'll open a little panel at the bottom of the screen.</li>
-        <li>If the deleter is still running, you'll see tweets streaming by as they are deleted. If it's finished, you should see a message saying it's done.</li>
-      </ol>
-      <h2>Ready?</h2>
-      <button id="go-button">
-        Delete My Tweets 
-      </button>
+      <div id="ready-container" class="dn">
+        <h2>Setup Complete!</h2>
+        <p id="time-estimate"></p>
+        <p>Once you press go, feel free to close this page. It'll continue running on its own in the background.</p>
+        <div id="go-container">
+          <h2>Ready?</h2>
+          <button id="go-button">
+            Delete My Tweets 
+          </button>
+        </div>
+      </div>
+
+      <div id="post-go-container" class="dn">
+        <h2>YOU DID IT!</h2>
+        <p>If you want to watch it running or check on its progress:</p>
+        <ol>
+          <li>Come back to this page</li>
+          <li>Click the Glitch fish in the upper right corner and click View Source. It'll bring you back to the file browser where you followed the setup instructions.</li>
+          <li>Above the file browser, click Status. It'll open a little panel at the bottom of the screen.</li>
+          <li>If the deleter is still running, you'll see tweets streaming by as they are deleted. If it's finished, you should see a message saying it's done.</li>
+        </ol>
+      </div>
     </div>
+
+    <canvas id="confetti-container"></canvas>
 
     <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
     <script src="https://button.glitch.me/button.js"></script>
+
+    <script src="/js/vendor/confetti.min.js"></script>
   </body>
 </html>
