@@ -33,83 +33,6 @@ var savedTweetsValid = false
 var appState = NOT_STARTED
 var appStatus = null
 
-fetch('/api/getStatus')
-  .then(res => res.json())
-  .then(resJson => {
-    appStatus = resJson
-
-    // Hide the status loading
-    loadingContainerEl.classList.add('dn')
-
-    // If it's finished we don't need to validate the config
-    if (resJson.deleteFinished) {
-      return Promise.resolve()
-    } else {
-      // Show the config loading
-      configContainerEl.classList.remove('dn')
-
-      // Verify the credentials and archive
-      return Promise.all([
-        verifyArchive(),
-        verifyCredentials(),
-        getSavedTweets(),
-      ])
-    }
-  })
-  .then(() => {
-    // If it's finished
-    if (appStatus.deleteFinished) {
-      appState = FINISHED
-
-      dropConfetti()
-      finishedContainerEl.classList.remove('dn')
-    } else {
-      // If it's actively running right now
-      if (appStatus.deleteRunning) {
-        appState = RUNNING
-        dropConfetti()
-        runningContainerEl.classList.remove('dn')
-      } else {
-        // If the credentials are valid
-        if (archiveValid && credentialsValid && savedTweetsValid) {
-          readyContainerEl.classList.remove('dn')
-
-          // If a delete has been started previously
-          if (appStatus.deleteStarted && !appStatus.deleteFinished) {
-            appState = PAUSED
-
-            resumeEstimateEl.innerHTML = `${appStatus.lastTweetDeletedIndex +
-              1} tweets were successfully deleted. It'll take approximately ${moment
-              .duration(
-                appStatus.tweetCount - (appStatus.lastTweetDeletedIndex + 1),
-                'seconds'
-              )
-              .humanize()} to delete your ${appStatus.tweetCount -
-              (appStatus.lastTweetDeletedIndex + 1)} remaining tweets.`
-
-            resumeContainerEl.classList.remove('dn')
-          } else {
-            appState = NOT_STARTED
-
-            firstRunEstimateEl.innerHTML = `It will take approximately ${moment
-              .duration(appStatus.tweetCount, 'seconds')
-              .humanize()} to delete your ${appStatus.tweetCount} tweets.`
-
-            firstRunContainerEl.classList.remove('dn')
-          }
-
-          goButtonEl.addEventListener('click', e => {
-            fetch('/api/go').then(function(res) {
-              dropConfetti()
-              goContainerEl.remove()
-              runningContainerEl.classList.remove('dn')
-            })
-          })
-        }
-      }
-    }
-  })
-
 function verifyArchive() {
   return fetch('/api/verifyArchive')
     .then(res => res.json())
@@ -197,3 +120,90 @@ function dropConfetti() {
 
   confetti.render()
 }
+
+function getStatus() {
+  return fetch('/api/getStatus')
+    .then(res => res.json())
+    .then(resJson => {
+      appStatus = resJson
+
+      return Promise.resolve()
+    })
+}
+
+getStatus()
+  .then(() => {
+    // Hide the status loading
+    loadingContainerEl.classList.add('dn')
+
+    // If it's finished we don't need to validate the config
+    if (appStatus.deleteFinished) {
+      return Promise.resolve()
+    } else {
+      // Show the config loading
+      configContainerEl.classList.remove('dn')
+
+      // Verify the credentials and archive
+      return Promise.all([
+        verifyArchive(),
+        verifyCredentials(),
+        getSavedTweets(),
+      ])
+    }
+  })
+  .then(() => {
+    // If it's finished
+    if (appStatus.deleteFinished) {
+      appState = FINISHED
+
+      dropConfetti()
+      finishedContainerEl.classList.remove('dn')
+    } else {
+      // If it's actively running right now
+      if (appStatus.deleteRunning) {
+        appState = RUNNING
+        dropConfetti()
+        runningContainerEl.classList.remove('dn')
+      } else {
+        // Update the status again now that we've done validation stuff
+        getStatus().then(() => {
+          // If the credentials are valid
+          if (archiveValid && credentialsValid && savedTweetsValid) {
+            readyContainerEl.classList.remove('dn')
+
+            // If a delete has been started previously
+            if (appStatus.deleteStarted && !appStatus.deleteFinished) {
+              appState = PAUSED
+
+              resumeEstimateEl.innerHTML = `${appStatus.lastTweetDeletedIndex +
+                1} tweets were successfully deleted. It'll take approximately ${moment
+                .duration(
+                  appStatus.tweetCount - (appStatus.lastTweetDeletedIndex + 1),
+                  'seconds'
+                )
+                .humanize()} to delete your ${appStatus.tweetCount -
+                (appStatus.lastTweetDeletedIndex + 1)} remaining tweets.`
+
+              resumeContainerEl.classList.remove('dn')
+            } else {
+              appState = NOT_STARTED
+
+              firstRunEstimateEl.innerHTML = `It will take approximately ${moment
+                .duration(appStatus.tweetCount, 'seconds')
+                .humanize()} to delete your ${appStatus.tweetCount} tweets.`
+
+              firstRunContainerEl.classList.remove('dn')
+            }
+
+            goButtonEl.addEventListener('click', e => {
+              fetch('/api/go').then(function(res) {
+                dropConfetti()
+                goContainerEl.remove()
+                runningContainerEl.classList.remove('dn')
+              })
+            })
+          }
+        })
+      }
+    }
+  })
