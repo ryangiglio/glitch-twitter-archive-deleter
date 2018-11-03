@@ -20,6 +20,8 @@ async function processTweet(tweet) {
   return new Promise((resolve, reject) => {
     console.log(`Deleting tweet ${tweet.tweet_id}\n${tweet.text}`)
 
+    /*
+     * DEBUG TWEETS - gets them instead of deletes them
     return twitterClient.get(
       `statuses/show/${tweet.tweet_id}`,
       async (err, returnedTweet, response) => {
@@ -33,8 +35,8 @@ async function processTweet(tweet) {
         }
       }
     )
+    */
 
-    /*
     return twitterClient.post(
       `statuses/destroy/${tweet.tweet_id}`,
       async (err, returnedTweet, response) => {
@@ -57,11 +59,17 @@ async function processTweet(tweet) {
               // The request limit for this resource has been reached for the current rate limit window.
               // TODO: Throttle requests so it automatically resumes
               console.log(`Twitter API rate limit exceeded`)
-              console.log(`Unsurprisingly, because they don't want you to do it, the rate limit for deleting tweets isn't very well documented.`)
-              console.log(`As far as I understand it doesn't work the same way as the other endpoints, and might be daily instead of hourly.`)
-              console.log(`Your best bet is to wait until tomorrow and try again. The script will pick up where you left off.`)
+              console.log(
+                `Unsurprisingly, because they don't want you to do it, the rate limit for deleting tweets isn't very well documented.`
+              )
+              console.log(
+                `As far as I understand it doesn't work the same way as the other endpoints, and might be daily instead of hourly.`
+              )
+              console.log(
+                `Your best bet is to wait until tomorrow and try again. The script will pick up where you left off.`
+              )
               console.log(`Sorry!`)
-              
+
               throw new Error('Twitter API rate limit exceeded')
 
               break
@@ -80,7 +88,9 @@ async function processTweet(tweet) {
               // Sorry, you are not authorized to see this status
               // Corresponds with HTTP 403. Thrown when a Tweet cannot be viewed by the authenticating user, usually due to the Tweet’s author having protected their Tweets.
               console.log(`You are not authorized to see this status`)
-              console.log(`You may have retweeted a user who is now protected or who has blocked you.`)
+              console.log(
+                `You may have retweeted a user who is now protected or who has blocked you.`
+              )
 
               // We can't do anything with this one, so it may as well be "deleted"
               await localStorage.setItem('lastTweetDeleted', tweet.tweet_id)
@@ -115,7 +125,6 @@ async function processTweet(tweet) {
         }
       }
     )
-    */
   })
 }
 
