@@ -7,10 +7,13 @@ var FINISHED = 3
 // Elements for showing/hiding
 var loadingContainerEl = document.getElementById('loading-container')
 
-var configContainerEl = document.getElementById('config-container')
+// Config
 var verifyArchiveEl = document.getElementById('verify-archive')
 var verifyCredentialsEl = document.getElementById('verify-credentials')
+var verifySavedEl = document.getElementById('verify-saved')
 
+// Containers
+var configContainerEl = document.getElementById('config-container')
 var readyContainerEl = document.getElementById('ready-container')
 var firstRunContainerEl = document.getElementById('first-run-instructions')
 var firstRunEstimateEl = document.getElementById('first-run-estimate')
@@ -26,6 +29,7 @@ var finishedContainerEl = document.getElementById('finished-container')
 // Init some global state
 var archiveValid = false
 var credentialsValid = false
+var savedTweetsValid = false
 var appState = NOT_STARTED
 var appStatus = null
 
@@ -45,7 +49,11 @@ fetch('/api/getStatus')
       configContainerEl.classList.remove('dn')
 
       // Verify the credentials and archive
-      return Promise.all([verifyArchive(), verifyCredentials()])
+      return Promise.all([
+        verifyArchive(),
+        verifyCredentials(),
+        getSavedTweets(),
+      ])
     }
   })
   .then(() => {
@@ -63,7 +71,7 @@ fetch('/api/getStatus')
         runningContainerEl.classList.remove('dn')
       } else {
         // If the credentials are valid
-        if (archiveValid && credentialsValid) {
+        if (archiveValid && credentialsValid && savedTweetsValid) {
           readyContainerEl.classList.remove('dn')
 
           // If a delete has been started previously
@@ -136,6 +144,26 @@ function verifyCredentials() {
         }.`
 
         credentialsValid = true
+      }
+
+      return Promise.resolve()
+    })
+}
+
+function getSavedTweets() {
+  return fetch('/api/getSavedTweets')
+    .then(res => res.json())
+    .then(resJson => {
+      if (resJson.error) {
+        verifySavedEl.innerHTML = `<i class="fas fa-times failure""></i> ${
+          resJson.error
+        }.`
+      } else {
+        verifySavedEl.innerHTML = `<i class="fas fa-check success"></i> ${
+          resJson.message
+        }.`
+
+        savedTweetsValid = true
       }
 
       return Promise.resolve()

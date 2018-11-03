@@ -1,10 +1,13 @@
 // Config
 require('dotenv').config()
 
+const config = require('config')
+
 // init project
 const path = require('path')
 const express = require('express')
 const app = express()
+const { findIndex } = require('lodash')
 
 const verifyCredentials = require('./twitter-deleter/verifyCredentials')
 const loadTweetArchive = require('./twitter-deleter/loadTweetArchive')
@@ -63,6 +66,25 @@ app.get('/api/verifyArchive', async (req, res) => {
         error: err.message,
       })
     })
+})
+
+app.get('/api/getSavedTweets', async (req, res) => {
+  const sampleIdIndex = findIndex(config.savedTweets, id => id === '1234567890')
+
+  const cleanedSavedTweets = [
+    ...config.savedTweets.slice(0, sampleIdIndex),
+    ...config.savedTweets.slice(sampleIdIndex + 1),
+  ]
+
+  if (cleanedSavedTweets.length === 0) {
+    res.status(200).json({
+      message: 'No tweets saved',
+    })
+  } else {
+    res.status(200).json({
+      message: `Saved tweets: ${cleanedSavedTweets.toString()}`,
+    })
+  }
 })
 
 app.get('/api/go', async (req, res) => {
