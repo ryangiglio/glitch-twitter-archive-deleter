@@ -11,14 +11,15 @@ body {
 
 h1 {
   font-style: italic;
-  color: #373fff;
+  color: #1da1f2;
 }
 
 .bold {
   font-weight: bold;
 }
 
-p {
+p,
+li {
   max-width: 600px;
 }
 
@@ -43,12 +44,6 @@ input {
 }
 
 button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
 }
 
 button:hover {
@@ -57,6 +52,10 @@ button:hover {
 
 button:active {
   box-shadow: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 li {
@@ -74,4 +73,29 @@ footer {
   max-width: 600px;
   height: auto;
   border: 2px solid #373fff;
+}
+
+#go-button {
+  position: relative;
+  font-size: 24px;
+  padding: 30px 50px;
+  background-color: #1da1f2;
+  color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #1576b2;
+  box-shadow: 0 9px 0 #1576b2, 0 0px 4px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+#go-button:hover,
+#go-button:focus {
+  outline: none;
+  top: -2px;
+  box-shadow: 0 11px 0 #1576b2, 0 0px 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+#go-button:active {
+  outline: none;
+  top: 2px;
+  box-shadow: 0 7px 0 #1576b2, 0 0px 4px 1px rgba(0, 0, 0, 0.3);
 }
