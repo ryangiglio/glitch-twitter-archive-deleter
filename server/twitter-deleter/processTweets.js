@@ -22,11 +22,12 @@ async function processTweet(tweet) {
 
     return twitterClient.get(
       `statuses/show/${tweet.tweet_id}`,
-      (err, returnedTweet, response) => {
+      async (err, returnedTweet, response) => {
         if (err) {
           throw new Error(err)
         } else {
           console.log('tweet processed but not deleted phew')
+          await localStorage.setItem('lastTweetDeleted', tweet.tweet_id)
 
           return resolve(returnedTweet)
         }
@@ -128,6 +129,8 @@ async function recursivelyProcessTweets(tweetsArray, index) {
 
   processTweet(tweetsArray[index])
     .then(deletedTweet => {
+      localStorage.setItem('lastTweetDeletedIndex', index)
+
       if (index + 1 < tweetsArray.length) {
         queuedAction = () => recursivelyProcessTweets(tweetsArray, index + 1)
       } else {
@@ -135,11 +138,14 @@ async function recursivelyProcessTweets(tweetsArray, index) {
           `================================================================================`
         )
         console.log(`DONE!!`)
+
+        localStorage.setItem('deleteFinished', true)
       }
     })
     .catch(err => {
       // If there's an error, clear the running flag
       localStorage.setItem('deleteRunning', false)
+      localStorage.setItem('lastTweetDeletedIndex', index)
 
       throw new Error(err)
     })
@@ -164,5 +170,6 @@ module.exports = async function(tweetsArray, startingIndex = 0) {
 
   queuedAction = () => recursivelyProcessTweets(tweetsArray, startingIndex)
 
+  localStorage.setItem('deleteStarted', true)
   localStorage.setItem('deleteRunning', true)
 }

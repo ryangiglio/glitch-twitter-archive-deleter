@@ -36,7 +36,7 @@ module.exports = async function() {
       }
 
       // Kick it off
-      // processTweets(tweetsArray, startingIndex)
+      processTweets(tweetsArray, startingIndex)
     })
     .catch(err => {
       console.log(err)

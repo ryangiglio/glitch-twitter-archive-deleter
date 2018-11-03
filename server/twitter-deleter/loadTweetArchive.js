@@ -1,5 +1,6 @@
 const fs = require('fs')
 const csv = require('fast-csv')
+const localStorage = require('../localStorage')
 
 module.exports = async () => {
   // Return a promise for when the whole processing is finished
@@ -26,8 +27,9 @@ module.exports = async () => {
           throw new Error(err)
         })
     })
-      .then(tweetsArray => {
+      .then(async tweetsArray => {
         console.log(`${tweetsArray.length} Tweets loaded`)
+        await localStorage.setItem('tweetCount', tweetsArray.length)
 
         return funcResolve(tweetsArray)
       })

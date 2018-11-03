@@ -21,22 +21,34 @@
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
-    
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/js/client.js" defer></script>
   </head>
   <body>
     <div id="app">
       <h1>Twitter Archive Deleter</h1>
+      <div id="loading-container">
+        <p><i class="fas fa-spinner fa-spin"></i> Checking app status...</p>
+      </div>
       
-      <h2>Verifying config...</h2>
-      <p id="verify-archive"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter archive...</p>
-      <p id="verify-credentials"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter credentials...</p>
+      <div id="config-container" class="dn">
+        <h2>Verifying config...</h2>
+        <p id="verify-archive"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter archive...</p>
+        <p id="verify-credentials"><i class="fas fa-spinner fa-spin"></i> Verifying Twitter credentials...</p>
+      </div>
 
       <div id="ready-container" class="dn">
-        <h2>Setup Complete!</h2>
-        <p id="time-estimate"></p>
-        <p>Once you press go, feel free to close this page. It'll continue running on its own in the background.</p>
+        <div id="first-run-instructions" class="dn">
+          <h2>Setup Complete!</h2>
+          <p id="first-run-estimate"></p>
+          <p>Once you press go, feel free to close this page. It'll continue running on its own in the background.</p>
+        </div>
+
+        <div id="resume-instructions" class="dn">
+          <h2>Your delete was interrupted!</h2>
+          <p>Something happened to interrupt your delete before it was finished. Sorry :(</p>
+          <p id="resume-estimate"></p>
+          <p>Once you press go, feel free to close this page. It'll continue running on its own in the background.</p>
+        </div>
+
         <div id="go-container">
           <h2>Ready?</h2>
           <button id="go-button">
@@ -45,9 +57,9 @@
         </div>
       </div>
 
-      <div id="post-go-container" class="dn">
-        <h2>YOU DID IT!</h2>
-        <p>If you want to watch it running or check on its progress:</p>
+      <div id="running-container" class="dn">
+        <h2>THERE THEY GO!</h2>
+        <p>The deleter is running! If you want to watch it running or check on its progress:</p>
         <ol>
           <li>Come back to this page</li>
           <li>Click the Glitch fish in the upper right corner and click View Source. It'll bring you back to the file browser where you followed the setup instructions.</li>
@@ -55,6 +67,12 @@
           <li>If the deleter is still running, you'll see tweets streaming by as they are deleted. If it's finished, you should see a message saying it's done.</li>
         </ol>
       </div>
+
+      <div id="finished-container" class="dn">
+        <h2>YOU DID IT!</h2>
+        <p>The deleter is done deleting your tweets. Go check out that beautiful clean timeline!</p>
+      </div>      
+
     </div>
 
     <canvas id="confetti-container"></canvas>
@@ -65,5 +83,9 @@
     <script src="https://button.glitch.me/button.js"></script>
 
     <script src="/js/vendor/confetti.min.js"></script>
+    <script src="/js/vendor/moment.min.js"></script>
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/js/client.js"></script>
   </body>
 </html>

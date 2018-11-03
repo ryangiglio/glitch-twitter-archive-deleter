@@ -5,7 +5,6 @@ require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const app = express()
-const moment = require('moment')
 
 const verifyCredentials = require('./twitter-deleter/verifyCredentials')
 const loadTweetArchive = require('./twitter-deleter/loadTweetArchive')
@@ -57,8 +56,6 @@ app.get('/api/verifyArchive', async (req, res) => {
     .then(tweetsArray => {
       res.status(200).json({
         message: `${tweetsArray.length} Tweets loaded`,
-        tweetCount: tweetsArray.length,
-        timeEstimate: moment.duration(tweetsArray.length, 'seconds').humanize(),
       })
     })
     .catch(err => {
@@ -74,6 +71,27 @@ app.get('/api/go', async (req, res) => {
   res.status(200).json({
     message:
       'Deleter started! Check the app console for progress. This could take a while...',
+  })
+})
+
+app.get('/api/getStatus', async (req, res) => {
+  const deleteStarted = await localStorage.getItem('deleteStarted')
+  const deleteRunning = await localStorage.getItem('deleteRunning')
+  const deleteFinished = await localStorage.getItem('deleteFinished')
+
+  const tweetCount = await localStorage.getItem('tweetCount')
+  const lastTweetDeleted = await localStorage.getItem('lastTweetDeleted')
+  const lastTweetDeletedIndex = await localStorage.getItem(
+    'lastTweetDeletedIndex'
+  )
+
+  res.status(200).json({
+    deleteStarted,
+    deleteRunning,
+    deleteFinished,
+    tweetCount,
+    lastTweetDeleted,
+    lastTweetDeletedIndex,
   })
 })
 
