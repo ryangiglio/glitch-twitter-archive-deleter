@@ -43,21 +43,6 @@ input {
   font-size: 16px;
 }
 
-button {
-}
-
-button:hover {
-  background-color: yellow;
-}
-
-button:active {
-  box-shadow: none;
-}
-
-button:disabled {
-  cursor: not-allowed;
-}
-
 li {
   margin-bottom: 5px;
 }
