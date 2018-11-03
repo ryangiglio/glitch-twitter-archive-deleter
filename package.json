@@ -40,5 +40,8 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "nodemonConfig": {
+    "ignore": [".persist"]
   }
 }
