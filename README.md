@@ -1,6 +1,6 @@
 # So you want to delete your old tweets
 
-Great! The setup process may seem like a lot of steps, but it's not that hard and should only take you 15-20 minutes. It's mostly just filling out forms and clicking buttons. Unfortunately, that's the cost of doing things yourself instead of trusting a service to do it for you.
+Great! The setup process may seem like a lot of steps, but it's not that hard and should only take you 15-20 minutes. It's mostly just filling out forms and clicking buttons. Unfortunately, that's the trade-off of doing things yourself instead of letting a service to do it for you.
 
 You're in the `README.md` file right now. If you look at the left you'll see a list of files that includes all the code necessary to make this app work. Don't worry about the rest of it, just remember that when you leave to do things always come back to the README.
 
