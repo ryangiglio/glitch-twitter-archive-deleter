@@ -2,6 +2,8 @@
 
 Great! The process requires a little setup, but it's not that hard and should only take you 10-15 minutes. It's mostly just filling out forms and clicking buttons. If you have any issues or questions, feel free to reach out to me on Twitter [@ryangiglio](https://twitter.com/ryangiglio) and I'll help you out.
 
+You're in the `README.md` file right now. If you look at the left you'll see a file browser that includes all the code necessary to make this app work. Don't worry about the rest of it, just remember that when you leave to do things always come back to the README.
+
 ## Setup
 
 ### (Optional) Sign up for Glitch
