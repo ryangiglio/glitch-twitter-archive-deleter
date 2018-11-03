@@ -68,14 +68,10 @@ footer {
   border-top: 1px solid lightgrey;
 }
 
-/* Custom styles */
-.instructions-img {
-  max-width: 600px;
-  height: auto;
-  border: 2px solid #373fff;
-}
-
-#go-button {
+/* 
+ * Custom styles
+ */
+.go-button {
   position: relative;
   font-size: 24px;
   padding: 30px 50px;
@@ -87,14 +83,14 @@ footer {
   cursor: pointer;
 }
 
-#go-button:hover,
-#go-button:focus {
+.go-button:hover,
+.go-button:focus {
   outline: none;
   top: -2px;
   box-shadow: 0 11px 0 #1576b2, 0 0px 4px 1px rgba(0, 0, 0, 0.3);
 }
 
-#go-button:active {
+.go-button:active {
   outline: none;
   top: 2px;
   box-shadow: 0 7px 0 #1576b2, 0 0px 4px 1px rgba(0, 0, 0, 0.3);
@@ -108,7 +104,7 @@ footer {
   color: #da1a33;
 }
 
-#confetti-container {
+.confetti-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -117,8 +113,12 @@ footer {
   z-index: 1;
 }
 
-#app {
+.app {
   /* To position above the confetti */
   position: relative;
   z-index: 2;
+}
+
+.glitchButton {
+  z-index: 9999;
 }
