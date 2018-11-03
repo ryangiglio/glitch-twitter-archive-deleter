@@ -1,7 +1,7 @@
 const config = require('config')
 
 const twitterClient = require('./twitterClient')
-const localStorage = require('./localStorage')
+const localStorage = require('../localStorage')
 
 const THROTTLE_INTERVAL_SPEED = 1000
 
@@ -138,6 +138,9 @@ async function recursivelyProcessTweets(tweetsArray, index) {
       }
     })
     .catch(err => {
+      // If there's an error, clear the running flag
+      localStorage.setItem('deleteRunning', false)
+
       throw new Error(err)
     })
 }
@@ -160,4 +163,6 @@ module.exports = async function(tweetsArray, startingIndex = 0) {
   }, THROTTLE_INTERVAL_SPEED)
 
   queuedAction = () => recursivelyProcessTweets(tweetsArray, startingIndex)
+
+  localStorage.setItem('deleteRunning', true)
 }

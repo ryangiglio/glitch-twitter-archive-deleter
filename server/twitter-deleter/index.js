@@ -11,7 +11,7 @@ const processTweets = require('./processTweets')
 const verifyCredentials = require('./verifyCredentials')
 const loadTweetArchive = require('./loadTweetArchive')
 
-const localStorage = require('./localStorage')
+const localStorage = require('../localStorage')
 
 module.exports = async function() {
   await verifyCredentials()
@@ -40,5 +40,6 @@ module.exports = async function() {
     })
     .catch(err => {
       console.log(err)
+      localStorage.setItem('deleteRunning', false)
     })
 }

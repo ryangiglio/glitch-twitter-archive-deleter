@@ -2,12 +2,14 @@
 require('dotenv').config()
 
 // init project
+const path = require('path')
 const express = require('express')
 const app = express()
 const moment = require('moment')
 
 const verifyCredentials = require('./twitter-deleter/verifyCredentials')
 const loadTweetArchive = require('./twitter-deleter/loadTweetArchive')
+const localStorage = require('./localStorage')
 
 const startDeleter = require('./twitter-deleter')
 
@@ -17,21 +19,23 @@ const startDeleter = require('./twitter-deleter')
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'))
 
+const viewsPath = path.join(__dirname, '..', 'views')
+
 // Serve the instructions page
 app.get('/', (req, res) => {
   if (process.env.INTRO_MODE) {
-    res.sendFile(__dirname + '/views/intro.html')
+    res.sendFile(`${viewsPath}/intro.html`)
   } else {
-    res.sendFile(__dirname + '/views/app.html')
+    res.sendFile(`${viewsPath}/app.html`)
   }
 })
 
 app.get('/intro', (req, res) => {
-  res.sendFile(__dirname + '/views/intro.html')
+  res.sendFile(`${viewsPath}/intro.html`)
 })
 
 app.get('/app', (req, res) => {
-  res.sendFile(__dirname + '/views/app.html')
+  res.sendFile(`${viewsPath}/app.html`)
 })
 
 app.get('/api/verifyCredentials', async (req, res) => {
@@ -72,6 +76,9 @@ app.get('/api/go', async (req, res) => {
       'Deleter started! Check the app console for progress. This could take a while...',
   })
 })
+
+// When the server resets, clear the delete running flag
+localStorage.setItem('deleteRunning', false)
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)

@@ -2,10 +2,10 @@
   "name": "glitch-twitter-archive-deleter",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node server",
+    "dev": "nodemon server",
     "prettier": "prettier --write \"**/*.js\""
   },
   "dependencies": {
