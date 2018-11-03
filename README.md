@@ -1,8 +1,10 @@
 # So you want to delete your old tweets
 
-Great! The process requires a little setup, but it's not that hard and should only take you 10-15 minutes. It's mostly just filling out forms and clicking buttons. If you have any issues or questions, feel free to reach out to me on Twitter [@ryangiglio](https://twitter.com/ryangiglio) and I'll help you out.
+Great! The setup process may seem like a lot of steps, but it's not that hard and should only take you 15-20 minutes. It's mostly just filling out forms and clicking buttons. Unfortunately, that's the cost of doing things yourself instead of trusting a service to do it for you.
 
-You're in the `README.md` file right now. If you look at the left you'll see a file browser that includes all the code necessary to make this app work. Don't worry about the rest of it, just remember that when you leave to do things always come back to the README.
+You're in the `README.md` file right now. If you look at the left you'll see a list of files that includes all the code necessary to make this app work. Don't worry about the rest of it, just remember that when you leave to do things always come back to the README.
+
+If you have any issues or questions, feel free to reach out to me on Twitter [@ryangiglio](https://twitter.com/ryangiglio) and I'll help you out.
 
 ## Setup
 
@@ -20,6 +22,7 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 1. Go to the [Twitter developer portal](https://developer.twitter.com)
 
 2. Click "Apply" in the top nav, and then the "Apply For A Developer Account" button
+   _You need to have a developer account in order to access Twitter's API, which is how this app deletes your tweets._
 
 3. If you don't have a verified phone number on your account, Twitter will ask you to add one.  
    _Twitter requires developers to have a verified phone number to have a point of contact in case of abuse. If you're not comfortable giving them your real phone number, there are a number of services that let you generate temporary phone numbers, although I can't vouch for any of them and it seems risky to permanently tie your account to a burner number. Your best bet is probably to add your real phone number and then if you want, remove it from your account when you're done using this app._
@@ -47,12 +50,13 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 1. Go to Twitter's [create an app](https://developer.twitter.com/en/apps/create) page
 
-2. Enter `yourusername archive deleter` as the App name
+   _The values you enter for steps 2, 3, and 4 don't actually matter for the functionality of this app, you're just naming a few things._
+
+2. Enter `(your username here) archive deleter` as the App name
 
 3. Enter `Glitch Twitter archive deleter credentials` as the Application description
 
-4. Enter `https://twitter.com` as the website URL  
-   _None of these three values will actually be used in the app, so they don't really matter. They just need to be filled in._
+4. Enter `https://twitter.com` as the website URL
 
 5. Scroll to the bottom of the page and copy/paste this text in the "Tell us how this app will be used" field
 
@@ -60,14 +64,15 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
    This app will be used to generate credentials that let me use the Twitter API on behalf of my own account.
    ```
 
-6. Press Create, and then press Create again on the popop
+6. Press Create, and then press Create again on the popup
 
 7. Click on the "Keys and tokens" tab at the top. Under the "Access token & access token secret" section, click the Create button
 
-8. Copy & paste your Consumer Key, Consumer Secret, Access Token, and Access Token secret from the Twitter app page into your `.env` file (the one with the little key in the file browser on the left). It should look like this, with your values filled in:
+8. Open your `.env` file from the list on the left (it's the one with the little key). Copy your Consumer API Key, Consumer API Secret Key, Access Token, and Access Token Secret from the Twitter app page and paste them into the `.env` file after each `=`. It should look like this, with your values filled in:
+
    ```
-   TWITTER_CONSUMER_KEY=Pqhe6a6rSFb4vfCun7sYyDWOA
-   TWITTER_CONSUMER_SECRET=HfTfQc0lFm33T3Ixfv4cCmRj0k6daT9iSa6DF2n3H6qwZ4lWai
+   TWITTER_CONSUMER_API_KEY=Pqhe6a6rSFb4vfCun7sYyDWOA
+   TWITTER_CONSUMER_API_SECRET_KEY=HfTfQc0lFm33T3Ixfv4cCmRj0k6daT9iSa6DF2n3H6qwZ4lWai
    TWITTER_ACCESS_TOKEN=12345678-AzNwMwPGtNehMvf86ChlhYuowX95Bw7BBbpmFm2qw
    TWITTER_ACCESS_TOKEN_SECRET=ym62oXokuSH5f7jqw18Mr7LuwCaifQHaFIQUtcoeC8QZL
    ```
@@ -90,13 +95,13 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 If you have some Tweets you just can't bear to part with, you can add them as exceptions so they don't get deleted along with the rest.
 
-1. Go to the tweet and click on it.
+1. Go to the tweet on [twitter.com](https://twitter.com) and click on it.
 
 2. In the URL bar at the top of your browser, you should see `https://twitter.com/username/status/#####`. Copy all of those numbers at the end - this is the Tweet ID.
 
-3. Open the file `config/default.js` in the file browser on the left.
+3. Open the file `config/default.js` in the list of files on the left.
 
-4. Inside the `[ ]` brackets, add a new line with your ID in single quotes followed by a comma at the end, the same as `'1234567890',`.
+4. Inside the `[ ]` brackets, add a new line with the Tweet ID in single quotes followed by a comma at the end, the same as `'1234567890',`.
 
 5. Repeat for as many Tweets as you want to save. The final file should look like this:
    ```
