@@ -1,10 +1,12 @@
 # So you want to delete your old tweets
 
-Great! The setup process may seem like a lot of steps, but it's not that hard and should only take you 15-20 minutes. It's mostly just filling out forms and clicking buttons. Unfortunately, that's the trade-off of doing things yourself instead of letting a service to do it for you.
+Great! The setup process may seem like a lot of steps, but it's not that hard and should only take you 15-20 minutes. Unfortunately, that's the trade-off of doing things yourself instead of letting a service to do it for you. It's mostly just filling out forms and clicking buttons, though, so don't worry.
 
-You're in the `README.md` file right now. If you look at the left you'll see a list of files that includes all the code necessary to make this app work. Don't worry about the rest of it, just remember that when you leave to do things always come back to the README.
+If you look at the left you'll see a list of files. Most of them are the code necessary to make this app work – you can ignore those (unless you're interested!). You'll also see `README.md` highlighted. That's the instructions file that you're looking at right now, and the highlight means it's open.
 
-If you have any issues or questions, feel free to reach out to me on Twitter [@ryangiglio](https://twitter.com/ryangiglio) and I'll help you out.
+Sometimes these instructions will link out to a page for you to go and do things. I recommend you open all links in a new tab so you always have the instructions open. If you forget, though, you can always use the back button in your browser, or go to <a href="https://glitch.com" target="_blank">glitch.com</a> and click the "Resume Coding" button in the top right. That will bring you back here again.
+
+If you have any issues or questions, feel free to reach out to me on Twitter <a href="https://twitter.com/ryangiglio" target="_blank">@ryangiglio</a> and I'll help you out.
 
 ## Setup
 
@@ -19,9 +21,11 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 ### Register with Twitter as a developer
 
-1. Go to the [Twitter developer portal](https://developer.twitter.com)
+_If you're already registered as a developer, skip to the next section._
 
-2. Click "Apply" in the top nav, and then the "Apply For A Developer Account" button
+1. Go to the <a href="https://developer.twitter.com" target="_blank">Twitter developer portal</a>
+
+2. Click "Apply" in the top right, and then the "Apply For A Developer Account" button
    _You need to have a developer account in order to access Twitter's API, which is how this app deletes your tweets._
 
 3. If you don't have a verified phone number on your account, Twitter will ask you to add one.  
@@ -31,7 +35,7 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 5. Select "I am requesting access for my own personal use." Fill in your Twitter username and select your country. Click "Continue".
 
-6. Select "Other" as your use case. In the "Describe in your own words what you're building" box, feel free to enter your own explanation or copy/paste this text that already meets their minimum text requirement:
+6. Select "Other" as your use case. In the "Describe in your own words what you're building" box, feel free to enter your own explanations or erase the pre-filled numbers and copy/paste this text that already meets their minimum text requirement. These are true answers to the four questions they ask you:
 
    ```
    1. I'm using Twitter's API to programmatically delete my own Twitter archive.
@@ -48,7 +52,7 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 ### Create an app and add the credentials to this project
 
-1. Go to Twitter's [create an app](https://developer.twitter.com/en/apps/create) page
+1. Go to Twitter's <a href="https://developer.twitter.com/en/apps/create" target="_blank">create an app</a> page
 
    _The values you enter for steps 2, 3, and 4 don't actually matter for the functionality of this app, you're just naming a few things._
 
@@ -79,7 +83,7 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 ### Download your Twitter archive
 
-1. Go to your [Twitter account settings](https://twitter.com/settings/account)
+1. Go to your <a href="https://twitter.com/settings/account" target="_blank">Twitter account settings</a>
 
 2. Scroll down to "Your Tweet archive" and click the "Request your archive" button
 
@@ -89,13 +93,13 @@ You _can_ setup and run this app without signing up for Glitch, but if there's a
 
 5. Unzip the archive (it'll have a long name of letters and numbers) and open the folder
 
-6. Drag and drop the `tweets.csv` file into this window. You should see a bunch of numbers and symbols – that's the content of the csv. You should also see tweets.csv show up in the sidebar to the left.
+6. Drag and drop the `tweets.csv` file into this window. You'll see a bunch of numbers and symbols – that's the content of the csv. You'll also see tweets.csv show up in the sidebar to the left.
 
 ### (Optional) Specify any tweets you don't want deleted
 
 If you have some Tweets you just can't bear to part with, you can add them as exceptions so they don't get deleted along with the rest.
 
-1. Go to the tweet on [twitter.com](https://twitter.com) and click on it.
+1. Go to the tweet on <a href="https://twitter.com" target="_blank">twitter.com</a> and click on it.
 
 2. In the URL bar at the top of your browser, you should see `https://twitter.com/username/status/#####`. Copy all of those numbers at the end - this is the Tweet ID.
 
